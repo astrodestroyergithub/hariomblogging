@@ -163,7 +163,18 @@ let hmbContainerInitialized = false;
  * Ensures all 'hmb_' tables, views, indexes, and triggers exist in NeonDB,
  * and automatically seeds pre-existing data if the tables are empty.
  */
-async function hmbEnsureSchemaAndSeed(dbUrl, forceReseed = false) {
+async function hmbEnsureSchemaAndSeed(dbUrl, forceReseed = false, cleanReset = false) {
+  if (cleanReset) {
+    await hmbQuery(dbUrl, `DROP VIEW IF EXISTS hmb_category_stats_vw CASCADE;`);
+    await hmbQuery(dbUrl, `DROP VIEW IF EXISTS hmb_published_feed_vw CASCADE;`);
+    await hmbQuery(dbUrl, `DROP FUNCTION IF EXISTS hmb_fn_touch_updated_at() CASCADE;`);
+    await hmbQuery(dbUrl, `DROP TABLE IF EXISTS hmb_admin_audit_log_tbl CASCADE;`);
+    await hmbQuery(dbUrl, `DROP TABLE IF EXISTS hmb_contact_details_tbl CASCADE;`);
+    await hmbQuery(dbUrl, `DROP TABLE IF EXISTS hmb_festive_banners_tbl CASCADE;`);
+    await hmbQuery(dbUrl, `DROP TABLE IF EXISTS hmb_quick_reads_tbl CASCADE;`);
+    await hmbQuery(dbUrl, `DROP TABLE IF EXISTS hmb_blog_posts_tbl CASCADE;`);
+    await hmbQuery(dbUrl, `DROP TABLE IF EXISTS hmb_site_config_tbl CASCADE;`);
+  }
   if (hmbContainerInitialized && !forceReseed) {
     return;
   }
@@ -282,6 +293,12 @@ async function hmbEnsureSchemaAndSeed(dbUrl, forceReseed = false) {
       hmb_audit_created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
     );
   `);
+
+  // Self-heal any older table definitions from prior runs
+  await hmbQuery(dbUrl, `ALTER TABLE hmb_festive_banners_tbl ADD COLUMN IF NOT EXISTS hmb_festival_icon TEXT NOT NULL DEFAULT '🪔';`);
+  await hmbQuery(dbUrl, `ALTER TABLE hmb_festive_banners_tbl ADD COLUMN IF NOT EXISTS hmb_festival_cta_label TEXT NOT NULL DEFAULT 'Explore Discourses →';`);
+  await hmbQuery(dbUrl, `ALTER TABLE hmb_festive_banners_tbl ADD COLUMN IF NOT EXISTS hmb_festival_cta_category TEXT NOT NULL DEFAULT 'Dharmic Living & Festivals';`);
+  await hmbQuery(dbUrl, `ALTER TABLE hmb_festive_banners_tbl ADD COLUMN IF NOT EXISTS hmb_festival_mantra_meaning TEXT NOT NULL DEFAULT '';`);
 
   // Create Views
   await hmbQuery(dbUrl, `
@@ -597,7 +614,7 @@ exports.handler = async (event) => {
       if (!hmbVerifyAdmin(event, bodyObj)) {
         return hmbResponse(401, { error: 'Unauthorized: Valid ADMIN_USERNAME and ADMIN_PASSWORD required.' });
       }
-      await hmbEnsureSchemaAndSeed(dbUrl, true);
+      await hmbEnsureSchemaAndSeed(dbUrl, true, Boolean(bodyObj.cleanReset));
       await hmbWriteAuditLog(dbUrl, 'RESEED_DATABASE', 'hmb_blog_posts_tbl', 'all', 'Re-seeded default Dharmic discourses, quick-reads, and festival presets into NeonDB.');
       const postRows = await hmbQuery(dbUrl, `SELECT * FROM hmb_blog_posts_tbl ORDER BY hmb_post_is_featured DESC, hmb_post_published_date DESC, hmb_post_id DESC;`);
       const quickRows = await hmbQuery(dbUrl, `SELECT * FROM hmb_quick_reads_tbl ORDER BY hmb_quick_id DESC;`);

@@ -1241,91 +1241,81 @@
           <p class="text-xs sm:text-sm" style="color: var(--hmb-text-secondary);">
             Every database object uses the <code class="font-mono font-bold">hmb_</code> prefix (<code class="font-mono">hmb_site_config_tbl</code>, <code class="font-mono">hmb_blog_posts_tbl</code>, <code class="font-mono">hmb_quick_reads_tbl</code>, <code class="font-mono">hmb_festive_banners_tbl</code>, <code class="font-mono">hmb_contact_details_tbl</code>, <code class="font-mono">hmb_admin_audit_log_tbl</code>, <code class="font-mono">hmb_published_feed_vw</code>, <code class="font-mono">hmb_category_stats_vw</code>, <code class="font-mono">hmb_fn_touch_updated_at()</code>, and <code class="font-mono">hmb_trg_posts_updated_at</code>) to guarantee zero naming conflicts in shared NeonDB instances.
           </p>
-          <pre id="hmb-sql-schema-code" class="p-4 rounded-2xl bg-stone-950 text-emerald-300 text-xs font-mono overflow-x-auto max-h-80 leading-relaxed">-- Unique 'hmb_' Prefixed NeonDB Schema (db/hmb_schema.sql)
-CREATE TABLE IF NOT EXISTS hmb_site_config_tbl (
+          <pre id="hmb-sql-schema-code" class="p-4 rounded-2xl bg-stone-950 text-emerald-300 text-xs font-mono overflow-x-auto max-h-80 leading-relaxed">-- =============================================================================
+-- ॐ हरि Blogging (Hari Om Blogging) — Cleanup, Fresh Schema &amp; Seed Script
+-- Prefix Convention: Every table, view, column, index, sequence, and trigger
+-- uses the unique 'hmb_' prefix so pre-existing non-'hmb_' tables in your
+-- NeonDB database remain 100% untouched.
+-- =============================================================================
+
+-- =============================================================================
+-- STEP 1: CLEANUP ALL PRE-EXISTING 'hmb_' OBJECTS
+-- Safely drops any older 'hmb_' views, triggers, functions, indexes, and tables
+-- =============================================================================
+DROP VIEW IF EXISTS hmb_category_stats_vw CASCADE;
+DROP VIEW IF EXISTS hmb_published_feed_vw CASCADE;
+
+DROP TRIGGER IF EXISTS hmb_trg_posts_updated_at ON hmb_blog_posts_tbl;
+DROP FUNCTION IF EXISTS hmb_fn_touch_updated_at() CASCADE;
+
+DROP INDEX IF EXISTS hmb_idx_posts_category;
+DROP INDEX IF EXISTS hmb_idx_posts_published_date;
+DROP INDEX IF EXISTS hmb_idx_posts_featured;
+DROP INDEX IF EXISTS hmb_idx_audit_created_at;
+
+DROP TABLE IF EXISTS hmb_admin_audit_log_tbl CASCADE;
+DROP TABLE IF EXISTS hmb_contact_details_tbl CASCADE;
+DROP TABLE IF EXISTS hmb_festive_banners_tbl CASCADE;
+DROP TABLE IF EXISTS hmb_quick_reads_tbl CASCADE;
+DROP TABLE IF EXISTS hmb_blog_posts_tbl CASCADE;
+DROP TABLE IF EXISTS hmb_site_config_tbl CASCADE;
+
+-- =============================================================================
+-- STEP 2: CREATE FRESH 'hmb_' TABLES
+-- =============================================================================
+
+-- 2.1 Site Global Configuration &amp; Persistent State Table
+CREATE TABLE hmb_site_config_tbl (
     hmb_config_id SERIAL PRIMARY KEY,
-    hmb_config_key VARCHAR(120) UNIQUE NOT NULL,
-    hmb_site_title VARCHAR(255) NOT NULL DEFAULT 'ॐ हरि Blogging',
-    hmb_active_language VARCHAR(32) NOT NULL DEFAULT 'en',
-    hmb_active_theme VARCHAR(64) NOT NULL DEFAULT 'sattvic_gold',
-    hmb_active_festival_key VARCHAR(64) NOT NULL DEFAULT 'sharad_deepavali',
+    hmb_config_key TEXT UNIQUE NOT NULL,
+    hmb_site_title TEXT NOT NULL DEFAULT 'ॐ हरि Blogging',
+    hmb_site_subtitle TEXT NOT NULL DEFAULT 'Sanatana Vangmaya, Vedic Wisdom &amp; Timeless Dharmic Reflections',
+    hmb_active_language TEXT NOT NULL DEFAULT 'en',
+    hmb_active_theme TEXT NOT NULL DEFAULT 'sattvic_gold',
+    hmb_active_festival_key TEXT NOT NULL DEFAULT 'sattvic_default',
     hmb_banner_enabled BOOLEAN NOT NULL DEFAULT TRUE,
-    hmb_banner_badge VARCHAR(120) NOT NULL,
-    hmb_banner_headline VARCHAR(300) NOT NULL,
-    hmb_banner_subtext TEXT NOT NULL,
-    hmb_daily_mantra_sanskrit TEXT NOT NULL,
-    hmb_daily_mantra_meaning TEXT NOT NULL,
+    hmb_banner_badge TEXT NOT NULL DEFAULT '🪔 शुभ उत्सव • Deepavali, Sharadotsav &amp; Chhath Parva',
+    hmb_banner_headline TEXT NOT NULL DEFAULT 'तमसो मा ज्योतिर्गमय — Lead Us From Darkness Unto Sacred Light',
+    hmb_banner_subtext TEXT NOT NULL DEFAULT 'Explore special festive discourses on Deepavali, Durga Puja, Chhath Puja, Bhai Dooj, Ganesh Chaturthi, and Vasant Holi.',
+    hmb_banner_cta_label TEXT NOT NULL DEFAULT 'Read Festive Discourses →',
+    hmb_banner_cta_category TEXT NOT NULL DEFAULT 'Dharmic Living &amp; Festivals',
+    hmb_daily_mantra_sanskrit TEXT NOT NULL DEFAULT 'ॐ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः। सर्वे भद्राणि पश्यन्तु मा कश्चिद्दुःखभाग्भवेत्॥',
+    hmb_daily_mantra_meaning TEXT NOT NULL DEFAULT 'May all sentient beings be at peace; may no one suffer from illness; may all see what is auspicious; may no one suffer.',
     hmb_config_updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE IF NOT EXISTS hmb_blog_posts_tbl (
+-- 2.2 Long-Form Dharmic Blog Posts Table
+CREATE TABLE hmb_blog_posts_tbl (
     hmb_post_id SERIAL PRIMARY KEY,
-    hmb_post_slug VARCHAR(255) UNIQUE NOT NULL,
-    hmb_post_title VARCHAR(400) NOT NULL,
-    hmb_post_subtitle VARCHAR(600) DEFAULT '',
-    hmb_post_category VARCHAR(120) NOT NULL,
-    hmb_post_tags TEXT[] NOT NULL DEFAULT '{}',
-    hmb_post_author_name VARCHAR(180) NOT NULL,
-    hmb_post_author_role VARCHAR(180) NOT NULL,
+    hmb_post_slug TEXT UNIQUE NOT NULL,
+    hmb_post_title TEXT NOT NULL,
+    hmb_post_subtitle TEXT NOT NULL DEFAULT '',
+    hmb_post_category TEXT NOT NULL,
+    hmb_post_tags TEXT[] NOT NULL DEFAULT '{}'::text[],
+    hmb_post_author_name TEXT NOT NULL DEFAULT 'Acharya Vishwanath Shastri',
+    hmb_post_author_role TEXT NOT NULL DEFAULT 'Vedanta &amp; Agamic Scholar',
     hmb_post_cover_image TEXT NOT NULL,
-    hmb_post_shloka_sanskrit TEXT DEFAULT '',
-    hmb_post_shloka_meaning TEXT DEFAULT '',
+    hmb_post_shloka_sanskrit TEXT NOT NULL DEFAULT '',
+    hmb_post_shloka_transliteration TEXT NOT NULL DEFAULT '',
+    hmb_post_shloka_meaning TEXT NOT NULL DEFAULT '',
     hmb_post_excerpt TEXT NOT NULL,
     hmb_post_content_html TEXT NOT NULL,
     hmb_post_word_count INTEGER NOT NULL DEFAULT 0,
     hmb_post_char_count INTEGER NOT NULL DEFAULT 0,
     hmb_post_reading_minutes INTEGER NOT NULL DEFAULT 5,
     hmb_post_views_count INTEGER NOT NULL DEFAULT 108,
-    hmb_post_likes_count INTEGER NOT NULL DEFAULT 27,
-    hmb_post_is_featured BOOLEAN NOT NULL DEFAULT FALSE,
-    hmb_post_is_published BOOLEAN NOT NULL DEFAULT TRUE,
-    hmb_post_translations_json JSONB NOT NULL DEFAULT '{}'::jsonb,
-    hmb_post_published_date DATE NOT NULL DEFAULT CURRENT_DATE,
-    hmb_post_created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    hmb_post_updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS hmb_quick_reads_tbl (
-    hmb_quick_id SERIAL PRIMARY KEY,
-    hmb_quick_title VARCHAR(300) NOT NULL,
-    hmb_quick_category VARCHAR(120) NOT NULL,
-    hmb_quick_sanskrit_verse TEXT NOT NULL,
-    hmb_quick_summary TEXT NOT NULL,
-    hmb_quick_scripture_source VARCHAR(200) NOT NULL,
-    hmb_quick_reading_seconds INTEGER NOT NULL DEFAULT 90,
-    hmb_quick_is_active BOOLEAN NOT NULL DEFAULT TRUE,
-    hmb_quick_created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS hmb_contact_details_tbl (
-    hmb_contact_id SERIAL PRIMARY KEY,
-    hmb_contact_key VARCHAR(64) UNIQUE NOT NULL DEFAULT 'primary_sanctuary',
-    hmb_sanctuary_name VARCHAR(250) NOT NULL,
-    hmb_contact_email VARCHAR(200) NOT NULL,
-    hmb_contact_phone VARCHAR(80) NOT NULL,
-    hmb_contact_address TEXT NOT NULL,
-    hmb_contact_hours VARCHAR(200) NOT NULL,
-    hmb_social_x_handle VARCHAR(160) NOT NULL,
-    hmb_social_youtube VARCHAR(160) NOT NULL,
-    hmb_footer_blessing TEXT NOT NULL,
-    hmb_contact_updated_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS hmb_admin_audit_log_tbl (
-    hmb_audit_id SERIAL PRIMARY KEY,
-    hmb_audit_action_type VARCHAR(100) NOT NULL,
-    hmb_audit_entity_name VARCHAR(150) NOT NULL,
-    hmb_audit_entity_ref VARCHAR(150) DEFAULT '',
-    hmb_audit_summary TEXT NOT NULL,
-    hmb_audit_payload_json JSONB NOT NULL DEFAULT '{}'::jsonb,
-    hmb_audit_actor VARCHAR(120) NOT NULL DEFAULT 'pradhan_sevak',
-    hmb_audit_created_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE OR REPLACE VIEW hmb_published_feed_vw AS
-SELECT hmb_post_id, hmb_post_slug, hmb_post_title, hmb_post_category, hmb_post_author_name,
-       hmb_post_reading_minutes, hmb_post_views_count, hmb_post_likes_count, hmb_post_published_date
-FROM hmb_blog_posts_tbl WHERE hmb_post_is_published = TRUE;</pre>
+    hmb_post_likes_count INTEGER NOT NULL DEFAUL
+-- (Full seeded SQL script available in db/hmb_schema.sql)</pre>
         </div>
       </div>
     </div>

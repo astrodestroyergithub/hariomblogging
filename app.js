@@ -1355,7 +1355,7 @@ function hmbSwitchAdminTab(tabName) {
 
 async function hmbTriggerDatabaseReseed() {
   hmbShowToast('Syncing & seeding default Dharmic data into NeonDB...', '🔄');
-  const res = await hmbApiRequest('POST', '/seed', {});
+  const res = await hmbApiRequest('POST', '/seed', { cleanReset: true });
   if (res.status === 401) {
     hmbHandleUnauthorizedError();
     return;
