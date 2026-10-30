@@ -1,0 +1,273 @@
+/* ============================================================================
+ * ॐ हरि Blogging (Hari Om Blogging) — Stylesheet & Festive Theme Variables
+ * ============================================================================ */
+
+:root, [data-theme="sattvic_gold"] {
+  --hmb-bg-primary: #FDF8EE;
+  --hmb-bg-secondary: #F6ECD9;
+  --hmb-bg-card: #FFFDF8;
+  --hmb-bg-elevated: #FFF6E3;
+  --hmb-text-primary: #2B130E;
+  --hmb-text-secondary: #5C3428;
+  --hmb-text-muted: #845848;
+  --hmb-accent-primary: #C84B11;
+  --hmb-accent-secondary: #D98A16;
+  --hmb-accent-gold: #B67B0F;
+  --hmb-border: #E5CFA8;
+  --hmb-hero-overlay: linear-gradient(135deg, rgba(43, 19, 14, 0.86) 0%, rgba(92, 24, 14, 0.78) 55%, rgba(145, 68, 12, 0.82) 100%);
+  --hmb-banner-grad: linear-gradient(90deg, #5A1219 0%, #9E2A1C 50%, #B8650B 100%);
+  --hmb-pill-bg: #F9E8C8;
+}
+
+[data-theme="diwali"] {
+  --hmb-bg-primary: #120B1E;
+  --hmb-bg-secondary: #1C1130;
+  --hmb-bg-card: #211538;
+  --hmb-bg-elevated: #2B1C48;
+  --hmb-text-primary: #FFF6DC;
+  --hmb-text-secondary: #E8D2A6;
+  --hmb-text-muted: #B69BC7;
+  --hmb-accent-primary: #FFB300;
+  --hmb-accent-secondary: #FF7043;
+  --hmb-accent-gold: #FFD54F;
+  --hmb-border: #4A3270;
+  --hmb-hero-overlay: linear-gradient(135deg, rgba(14, 7, 27, 0.90) 0%, rgba(49, 18, 75, 0.84) 55%, rgba(130, 62, 10, 0.84) 100%);
+  --hmb-banner-grad: linear-gradient(90deg, #240B36 0%, #8E1B3E 50%, #D47A00 100%);
+  --hmb-pill-bg: #322052;
+}
+
+[data-theme="durga_puja"] {
+  --hmb-bg-primary: #FFF7F4;
+  --hmb-bg-secondary: #FCE8E1;
+  --hmb-bg-card: #FFFFFF;
+  --hmb-bg-elevated: #FFF0EB;
+  --hmb-text-primary: #360B0E;
+  --hmb-text-secondary: #682127;
+  --hmb-text-muted: #91464B;
+  --hmb-accent-primary: #B71C1C;
+  --hmb-accent-secondary: #D4880F;
+  --hmb-accent-gold: #C6840E;
+  --hmb-border: #ECC0B8;
+  --hmb-hero-overlay: linear-gradient(135deg, rgba(64, 8, 14, 0.88) 0%, rgba(136, 19, 28, 0.82) 55%, rgba(161, 88, 14, 0.82) 100%);
+  --hmb-banner-grad: linear-gradient(90deg, #6B0912 0%, #B71C1C 52%, #C97A10 100%);
+  --hmb-pill-bg: #FADCD6;
+}
+
+[data-theme="holi"] {
+  --hmb-bg-primary: #FFF8FB;
+  --hmb-bg-secondary: #F9EBF4;
+  --hmb-bg-card: #FFFFFF;
+  --hmb-bg-elevated: #FDF0F8;
+  --hmb-text-primary: #2D1028;
+  --hmb-text-secondary: #5B2852;
+  --hmb-text-muted: #884D7D;
+  --hmb-accent-primary: #C2185B;
+  --hmb-accent-secondary: #00897B;
+  --hmb-accent-gold: #E67E00;
+  --hmb-border: #E8C2DC;
+  --hmb-hero-overlay: linear-gradient(135deg, rgba(74, 14, 58, 0.86) 0%, rgba(145, 22, 83, 0.80) 50%, rgba(13, 108, 100, 0.82) 100%);
+  --hmb-banner-grad: linear-gradient(90deg, #880E4F 0%, #D81B60 38%, #FB8C00 72%, #00897B 100%);
+  --hmb-pill-bg: #F6DCEB;
+}
+
+[data-theme="ganesh_chaturthi"] {
+  --hmb-bg-primary: #FFF9F0;
+  --hmb-bg-secondary: #FDEBD2;
+  --hmb-bg-card: #FFFDF9;
+  --hmb-bg-elevated: #FFF3E0;
+  --hmb-text-primary: #331407;
+  --hmb-text-secondary: #662D13;
+  --hmb-text-muted: #8F4D2D;
+  --hmb-accent-primary: #E64A19;
+  --hmb-accent-secondary: #C78A0E;
+  --hmb-accent-gold: #B87908;
+  --hmb-border: #ECC9A4;
+  --hmb-hero-overlay: linear-gradient(135deg, rgba(68, 20, 6, 0.88) 0%, rgba(168, 48, 14, 0.82) 55%, rgba(166, 102, 10, 0.84) 100%);
+  --hmb-banner-grad: linear-gradient(90deg, #7F1D09 0%, #D84315 50%, #D48806 100%);
+  --hmb-pill-bg: #FCE2C4;
+}
+
+[data-theme="chhath_puja"] {
+  --hmb-bg-primary: #FFF9F1;
+  --hmb-bg-secondary: #F4E9D8;
+  --hmb-bg-card: #FFFFFF;
+  --hmb-bg-elevated: #FBF1E1;
+  --hmb-text-primary: #211C16;
+  --hmb-text-secondary: #4B4031;
+  --hmb-text-muted: #78664E;
+  --hmb-accent-primary: #D95F02;
+  --hmb-accent-secondary: #0F6E7A;
+  --hmb-accent-gold: #C27D0E;
+  --hmb-border: #DFC9A8;
+  --hmb-hero-overlay: linear-gradient(135deg, rgba(16, 48, 58, 0.88) 0%, rgba(112, 52, 14, 0.84) 55%, rgba(186, 92, 12, 0.84) 100%);
+  --hmb-banner-grad: linear-gradient(90deg, #0D4B56 0%, #9E470E 52%, #E07A12 100%);
+  --hmb-pill-bg: #EFE0C6;
+}
+
+[data-theme="bhai_dooj"] {
+  --hmb-bg-primary: #FDF8F6;
+  --hmb-bg-secondary: #F4E5EE;
+  --hmb-bg-card: #FFFFFF;
+  --hmb-bg-elevated: #FAF0F6;
+  --hmb-text-primary: #2A1221;
+  --hmb-text-secondary: #582A47;
+  --hmb-text-muted: #844D70;
+  --hmb-accent-primary: #8E2457;
+  --hmb-accent-secondary: #D48415;
+  --hmb-accent-gold: #B8720E;
+  --hmb-border: #DFC2D3;
+  --hmb-hero-overlay: linear-gradient(135deg, rgba(46, 14, 36, 0.88) 0%, rgba(108, 25, 68, 0.82) 55%, rgba(158, 92, 16, 0.84) 100%);
+  --hmb-banner-grad: linear-gradient(90deg, #4A1131 0%, #8E2457 52%, #CF7E12 100%);
+  --hmb-pill-bg: #EED8E5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--hmb-bg-primary);
+  color: var(--hmb-text-primary);
+  font-family: 'Inter', 'Noto Serif Devanagari', 'Noto Serif Bengali', sans-serif;
+  transition: background-color 0.35s ease, color 0.35s ease;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(217, 138, 22, 0.07) 0%, transparent 32%),
+    radial-gradient(circle at 88% 82%, rgba(200, 75, 17, 0.07) 0%, transparent 32%);
+}
+
+.hmb-font-display {
+  font-family: 'Cinzel Decorative', 'Noto Serif Devanagari', 'Noto Serif Bengali', serif;
+}
+
+.hmb-font-serif {
+  font-family: 'Lora', 'Noto Serif Devanagari', 'Noto Serif Bengali', serif;
+}
+
+.hmb-font-sanskrit {
+  font-family: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', 'Noto Serif Bengali', serif;
+}
+
+.hmb-card {
+  background-color: var(--hmb-bg-card);
+  border: 1px solid var(--hmb-border);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.hmb-card:hover {
+  border-color: var(--hmb-accent-secondary);
+  box-shadow: 0 14px 32px -10px rgba(43, 19, 14, 0.14);
+}
+
+.hmb-btn-primary {
+  background: linear-gradient(135deg, var(--hmb-accent-primary) 0%, var(--hmb-accent-secondary) 100%);
+  color: #FFFDF9;
+  transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+.hmb-btn-primary:hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.hmb-btn-outline {
+  border: 1px solid var(--hmb-border);
+  background-color: var(--hmb-bg-card);
+  color: var(--hmb-text-primary);
+  transition: all 0.2s ease;
+}
+
+.hmb-btn-outline:hover {
+  border-color: var(--hmb-accent-primary);
+  background-color: var(--hmb-pill-bg);
+}
+
+.hmb-pill-active {
+  background: linear-gradient(135deg, var(--hmb-accent-primary) 0%, var(--hmb-accent-secondary) 100%);
+  color: #FFFFFF !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 12px rgba(200, 75, 17, 0.28);
+}
+
+@keyframes hmbSpinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.hmb-mandala-spin {
+  animation: hmbSpinSlow 72s linear infinite;
+}
+
+/* Long-form Discourse Typography */
+.hmb-grantha-body h2 {
+  font-family: 'Lora', 'Noto Serif Devanagari', 'Noto Serif Bengali', serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--hmb-accent-primary);
+  margin-top: 1.85rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.35;
+  border-bottom: 1px solid var(--hmb-border);
+  padding-bottom: 0.35rem;
+}
+
+.hmb-grantha-body h3 {
+  font-family: 'Lora', 'Noto Serif Devanagari', 'Noto Serif Bengali', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--hmb-text-primary);
+  margin-top: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.hmb-grantha-body p {
+  margin-bottom: 1.15rem;
+  line-height: 1.85;
+}
+
+.hmb-grantha-body blockquote, .hmb-shloka-box {
+  background-color: var(--hmb-bg-elevated);
+  border-left: 4px solid var(--hmb-accent-primary);
+  border-right: 1px solid var(--hmb-border);
+  border-top: 1px solid var(--hmb-border);
+  border-bottom: 1px solid var(--hmb-border);
+  padding: 1.15rem 1.35rem;
+  margin: 1.4rem 0;
+  border-radius: 0.75rem;
+  font-family: 'Tiro Devanagari Sanskrit', 'Noto Serif Devanagari', 'Lora', serif;
+}
+
+.hmb-grantha-body ul, .hmb-grantha-body ol {
+  margin: 1rem 0 1.25rem 1.5rem;
+  line-height: 1.8;
+}
+
+.hmb-grantha-body ul { list-style-type: disc; }
+.hmb-grantha-body ol { list-style-type: decimal; }
+
+#hmb-editor-canvas {
+  min-height: 360px;
+  max-height: 620px;
+  overflow-y: auto;
+  outline: none;
+}
+
+#hmb-editor-canvas:focus {
+  box-shadow: 0 0 0 2px var(--hmb-accent-primary);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--hmb-bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--hmb-accent-secondary);
+  border-radius: 4px;
+}

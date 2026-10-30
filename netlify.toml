@@ -14,7 +14,7 @@
     Access-Control-Allow-Origin = "*"
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization, X-HMB-Admin-User, X-HMB-Admin-Password"
-    Access-Control-Expose-Headers = "X-HMB-Total-Count, X-HMB-Platform"
+    Access-Control-Expose-Headers = "X-HMB-Total-Count, X-HMB-Platform, X-HMB-DB-Status"
 
 [[headers]]
   for = "/favicon.svg"
