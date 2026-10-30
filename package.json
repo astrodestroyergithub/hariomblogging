@@ -1,0 +1,22 @@
+{
+  "name": "hari-om-blogging-platform",
+  "version": "1.0.0",
+  "description": "ॐ हरि Blogging (Hari Om Blogging) — Sanatana Dharmic Blogging Platform with Multilingual Support, Festive Customizer & Open Developer REST API",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx netlify-cli dev",
+    "build": "echo 'Static & Serverless bundle ready for Netlify deployment'"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4"
+  },
+  "keywords": [
+    "dharma",
+    "sanatana",
+    "vedanta",
+    "sanskrit",
+    "blogging",
+    "netlify"
+  ],
+  "license": "MIT"
+}

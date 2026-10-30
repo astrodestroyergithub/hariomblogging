@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <radialGradient id="hmb_aura_grad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF5D6"/>
+      <stop offset="45%" stop-color="#FFB300"/>
+      <stop offset="82%" stop-color="#D84315"/>
+      <stop offset="100%" stop-color="#5D101D"/>
+    </radialGradient>
+    <linearGradient id="hmb_gold_rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="50%" stop-color="#FFA000"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </linearGradient>
+    <filter id="hmb_glow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#3E0A12" flood-opacity="0.65"/>
+    </filter>
+  </defs>
+  <!-- Outer Sacred Mandala Disc -->
+  <circle cx="64" cy="64" r="61" fill="url(#hmb_aura_grad)" stroke="url(#hmb_gold_rim)" stroke-width="3.5"/>
+  <circle cx="64" cy="64" r="54" fill="none" stroke="#FFF8E7" stroke-width="1" stroke-dasharray="3 3" opacity="0.7"/>
+  <!-- 8-Petalled Sacred Padma Ring -->
+  <g fill="#FFECB3" opacity="0.26" transform="translate(64,64)">
+    <path d="M0,-52 C10,-36 10,-20 0,-8 C-10,-20 -10,-36 0,-52 Z"/>
+    <path d="M0,-52 C10,-36 10,-20 0,-8 C-10,-20 -10,-36 0,-52 Z" transform="rotate(45)"/>
+    <path d="M0,-52 C10,-36 10,-20 0,-8 C-10,-20 -10,-36 0,-52 Z" transform="rotate(90)"/>
+    <path d="M0,-52 C10,-36 10,-20 0,-8 C-10,-20 -10,-36 0,-52 Z" transform="rotate(135)"/>
+    <path d="M0,-52 C10,-36 10,-20 0,-8 C-10,-20 -10,-36 0,-52 Z" transform="rotate(180)"/>
+    <path d="M0,-52 C10,-36 10,-20 0,-8 C-10,-20 -10,-36 0,-52 Z" transform="rotate(225)"/>
+    <path d="M0,-52 C10,-36 10,-20 0,-8 C-10,-20 -10,-36 0,-52 Z" transform="rotate(270)"/>
+    <path d="M0,-52 C10,-36 10,-20 0,-8 C-10,-20 -10,-36 0,-52 Z" transform="rotate(315)"/>
+  </g>
+  <!-- Inner Sanctum Circle -->
+  <circle cx="64" cy="64" r="41" fill="#4A0E17" fill-opacity="0.78" stroke="url(#hmb_gold_rim)" stroke-width="2"/>
+  <!-- Lotus Base Cradling the Pranava Om -->
+  <path d="M36,88 C46,98 82,98 92,88 C83,93 45,93 36,88 Z" fill="url(#hmb_gold_rim)"/>
+  <path d="M42,84 C52,92 76,92 86,84 C76,88 52,88 42,84 Z" fill="#FFE082"/>
+  <!-- Sacred Devanagari Om (ॐ) Emblem -->
+  <text x="64" y="77" text-anchor="middle" font-family="'Noto Serif Devanagari', 'Tiro Devanagari Sanskrit', 'Mangal', serif" font-size="52" font-weight="700" fill="#FFF8E1" filter="url(#hmb_glow)">ॐ</text>
+  <!-- Top Bindu & Tilak Ray -->
+  <circle cx="64" cy="18" r="3" fill="#FFF8E1"/>
+</svg>
